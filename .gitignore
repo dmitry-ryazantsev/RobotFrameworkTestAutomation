@@ -1,4 +1,8 @@
 .idea/
-.pytest_cache
+.venv/
 *.__pycache__/
-venv/
+*log.html
+*output.xml
+*report.html
+*.log
+*.png
