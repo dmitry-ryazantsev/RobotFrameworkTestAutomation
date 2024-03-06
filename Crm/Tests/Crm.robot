@@ -1,35 +1,37 @@
 *** Settings ***
-Documentation   Basic info about the whole suite
-Library         SeleniumLibrary   
+Documentation       Basic info about the whole suite
+Resource            ../Resources/Common.robot
+Resource            ../Resources/CrmApp.robot
+Test Setup          Begin Web Test
+Test Teardown       End Web Test
+
+*** Variables ***
+${VALID_LOGIN_EMAIL}         foo@gmail.com
+${VALID_LOGIN_PASSWORD}      MyPassword!
 
 *** Test Cases ***
+Home page should load
+    [Documentation]                Test the home page
+    [Tags]                         1001    Smoke    Home
+    CrmApp.Go To "Home" Page
+
+Should be able to login with valid credentials
+    [Documentation]                Test the login
+    [Tags]                         1002    Smoke    Login
+    CrmApp.Go To "Home" Page
+    CrmApp.Login With Valid Credentials        ${VALID_LOGIN_EMAIL}     ${VALID_LOGIN_PASSWORD}
+
+Should be able to log out
+    [Documentation]                Test the logout
+    [Tags]                         1004    Smoke    Logout
+    CrmApp.Go To "Home" Page
+    CrmApp.Login With Valid Credentials        ${VALID_LOGIN_EMAIL}     ${VALID_LOGIN_PASSWORD}
+    CrmApp.Sign Out
+
 Should be able to add new customer
-    [Documentation]                Basic info about the test
-    [Tags]                         1006    Smoke    Contacts
-    
-    Log                            Starting the test case
-    Open Browser                   https://automationplayground.com/crm/    chrome
-    Page Should Contain            Customers Are Priority One
-    
-    Click Link                     id=SignIn
-    Page Should Contain            Login
-    
-    Input Text                     name=email-name        foo@gmail.com
-    Input Text                     name=password-name     password
-    Click Button                   css=#submit-id
-    Page Should Contain            Our Happy Customers
-
-    Click Link                     id=new-customer
-    Page Should Contain            Add Customer
-
-    Input Text                     id=EmailAddress        johndoe@gmail.com
-    Input Text                     id=FirstName           John
-    Input Text                     id=LastName            Doe
-    Input Text                     id=City                Anchorage
-    Select From List By Value      id=StateOrRegion       AK
-    Select Radio Button            gender                 male
-    Select Checkbox                name=promos-name
-    Click Button                   Submit
-    Page Should Contain            Success! New customer added
-
-    Close Browser
+    [Documentation]                Test adding a new customer
+    [Tags]                         1006    Smoke    Customers
+    CrmApp.Go To "Home" Page
+    CrmApp.Login With Valid Credentials        ${VALID_LOGIN_EMAIL}     ${VALID_LOGIN_PASSWORD}
+    CrmApp.Add New Customer
+    CrmApp.Sign Out
