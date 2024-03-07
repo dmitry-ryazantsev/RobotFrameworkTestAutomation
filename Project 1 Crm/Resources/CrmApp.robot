@@ -6,8 +6,6 @@ Resource    ./PO/LoggedOut.robot
 Resource    ./PO/SignIn.robot
 Resource    ./PO/TopNav.robot
 
-*** Variables ***
-
 *** Keywords ***
 Go To "Home" Page
     Home.Navigate To
