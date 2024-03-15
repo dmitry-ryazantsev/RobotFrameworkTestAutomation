@@ -7,6 +7,12 @@ Test Setup  Common.Begin Web Test
 Test Teardown  Common.End Web Test
 
 *** Test Cases ***
+Invalid login scenarios should display correct error messages
+    [Template]  Test Multiple Login Scenarios
+    ${UNREGISTERED_USER}
+    ${INVALID_PASSWORD_USER}
+    ${BLANK_CREDENTIALS_USER}
+
 Unregistered user should see correct error message at login
     CarsApp.Navigate to Sign In Page
     CarsApp.Attempt Login  ${UNREGISTERED_USER}
