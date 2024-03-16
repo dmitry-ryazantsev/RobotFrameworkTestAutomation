@@ -1,13 +1,15 @@
 *** Settings ***
 Documentation  Demonstrate a need for data-driven testing
-Resource  ../Data/InputData.robot
 Resource  ../Resources/Common.robot
 Resource  ../Resources/CarsApp.robot
+Resource  ../Resources/DataManager.robot
 Test Setup  Common.Begin Web Test
 Test Teardown  Common.End Web Test
 
 *** Test Cases ***
-# This is an alternative to the three cases below
+Should see correct error messages with invalid logins
+    ${InvalidLoginScenarios} =    DataManager.Get CSV Data    ${INVALID_CREDENTIALS_PATH_CSV}
+
 Invalid login scenarios should display correct error messages
     [Template]  Test Multiple Login Scenarios
     ${UNREGISTERED_USER}

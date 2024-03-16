@@ -6,4 +6,4 @@ Library    ../CustomLibs/Csv.py
 Get CSV Data
     [Arguments]    ${FilePath}
     ${Data} =    Read Csv File    ${FilePath}
-    [Return]    ${Data}
+    RETURN    ${Data}
