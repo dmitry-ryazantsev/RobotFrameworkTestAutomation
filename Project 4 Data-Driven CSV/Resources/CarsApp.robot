@@ -2,11 +2,13 @@
 Resource  ../Resources/PO/SignIn.robot
 
 *** Keywords ***
-Test Multiple Login Scenarios
-    [Arguments]  ${Credentials}
-    Navigate to Sign In Page
-    Attempt Login    ${Credentials}
-    Verify Login Page Error Message    ${Credentials.ExpectedErrorMessage}
+Login with Many Invalid Credentials
+    [Arguments]    ${InvalidLoginScenarios}
+    FOR    ${LoginScenario}    IN    @{InvalidLoginScenarios}
+        Navigate to Sign In Page
+        Attempt Login    ${LoginScenario}
+        Verify Login Page Error Message    ${LoginScenario}
+    END
 
 Navigate to Sign In Page
     SignIn.Navigate To

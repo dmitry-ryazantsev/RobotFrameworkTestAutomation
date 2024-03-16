@@ -14,15 +14,15 @@ Navigate To
 
 Enter Credentials
     [Arguments]  ${Credentials}
-    Run Keyword Unless  '${Credentials.Email}' == '#BLANK'  Input Text  ${SIGN_IN_EMAIL}  ${Credentials.Email}
-    Run Keyword Unless  '${Credentials.Password}' == '#BLANK'  Input Text  ${SIGN_IN_PASSWORD}  ${Credentials.Password}
+    Run Keyword Unless  '${Credentials[0]}' == '#BLANK'  Input Text  ${SIGN_IN_EMAIL}  ${Credentials[0]}
+    Run Keyword Unless  '${Credentials[1]}' == '#BLANK'  Input Text  ${SIGN_IN_PASSWORD}  ${Credentials[1]}
 
 Click Submit
     Click Button  ${LOGIN_SUBMIT_BUTTON}
 
 Verify Error Message
     [Arguments]  ${ExpectedErrorMessage}
-    Page Should Contain  ${ExpectedErrorMessage}
+    Page Should Contain  ${ExpectedErrorMessage[2]}
 
 Clear Input Fields
     Clear Element Text  ${SIGN_IN_EMAIL}
